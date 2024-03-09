@@ -50,21 +50,20 @@ extension AppLink {
 
 extension URL {
     /// Evaluates the URL if it represents any known app link.
-    ///
+    /// 
+    /// - Parameter repository: The ``AppLinkRepository`` to check. Defaults to ``AppLinkRepository/shared``
     /// - Returns: The app or `nil` if its not a known app.
-    ///
-    /// This will check any type registered in ``URl/AppLinkManager``
-    public func app() -> (any AppLink)? {
+    public func app(from repository: AppLinkRepository = .shared) -> (any AppLink)? {
         guard let scheme = scheme?.lowercased() else { return nil }
         
         if Browser.schemes.contains(scheme) {
-            for appType in URL.appLinkManager.allUniversalLinkTypes {
+            for appType in repository.allUniversalLinkTypes {
                 if let value = appType.init(url: self) {
                     return value
                 }
             }
         } else {
-            for appType in URL.appLinkManager.types {
+            for appType in repository.types {
                 if let value = appType.init(url: self) {
                     return value
                 }

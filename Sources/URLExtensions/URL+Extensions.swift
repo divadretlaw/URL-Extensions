@@ -15,7 +15,7 @@ public extension URL {
         guard let scheme = scheme?.lowercased() else { return false }
         
         if Browser.schemes.contains(scheme) {
-            return !Self.appLinkManager.allUniversalLinkTypes.contains { $0.check(against: self) }
+            return !AppLinkRepository.shared.allUniversalLinkTypes.contains { $0.check(against: self) }
         } else {
             return false
         }

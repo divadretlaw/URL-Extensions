@@ -11,7 +11,7 @@ extension URL {
     /// Creates a App Store URL instance from the provided data.
     ///
     /// - Parameters:
-    ///   - parameters: The App Store Parameters. See ``AppStoreParameters``.
+    ///   - parameters: The App Store Parameters. See ``AppStoreParameter``.
     ///   - preferUniversalLink: Whether to create the URL using the universal link or url scheme. Defaults to `false`.
     public static func appStore(parameters: AppStoreParameter, preferUniversalLink: Bool = false) -> URL {
         let path = [parameters.countryCode, "app", parameters.description]
