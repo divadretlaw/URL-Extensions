@@ -64,7 +64,7 @@ extension URL {
     /// Mail URL Parameter
     ///
     /// See [Mail Links](https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/MailLinks/MailLinks.html) for more details.
-    public struct MailParameter: Equatable, Hashable, Codable {
+    public struct MailParameter: Equatable, Hashable, Codable, Sendable {
         var subject: String?
         var body: String?
         var carbonCopy: [String]?

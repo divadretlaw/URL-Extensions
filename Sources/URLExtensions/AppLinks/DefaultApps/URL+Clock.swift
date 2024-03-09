@@ -61,7 +61,7 @@ extension URL {
 // MARK: - Subtypes
 
 extension URL.Clock {
-    public enum Tab: Int, Codable {
+    public enum Tab: Int, Codable, Sendable {
         case alarm
         case sleepAlarm
         case stopwatch

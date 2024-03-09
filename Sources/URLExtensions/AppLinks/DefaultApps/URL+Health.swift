@@ -50,7 +50,7 @@ extension URL {
 // MARK: - Subtypes
 
 extension URL.Health {
-    public enum Tab: String, Codable {
+    public enum Tab: String, Codable, Sendable {
         case summary
         case browse
     }

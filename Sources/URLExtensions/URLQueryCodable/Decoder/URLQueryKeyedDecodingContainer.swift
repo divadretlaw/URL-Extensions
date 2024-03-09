@@ -19,11 +19,23 @@ final class URLQueryKeyedDecodingContainer<Key>: KeyedDecodingContainerProtocol 
     // MARK: - Errors
     
     private func notFoundError(key: Key) -> DecodingError {
-        DecodingError.keyNotFound(key, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "No value associated with key \(key.stringValue)."))
+        DecodingError.keyNotFound(
+            key,
+            DecodingError.Context(
+                codingPath: self.decoder.codingPath,
+                debugDescription: "No value associated with key \(key.stringValue)."
+            )
+        )
     }
     
     private func typeMismatchError<T>(key: Key, type: T) -> DecodingError {
-        DecodingError.typeMismatch(T.self, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Type of value at key \(key.stringValue) was not expected."))
+        DecodingError.typeMismatch(
+            T.self,
+            DecodingError.Context(
+                codingPath: self.decoder.codingPath,
+                debugDescription: "Type of value at key \(key.stringValue) was not expected."
+            )
+        )
     }
     
     // MARK: - KeyedDecodingContainerProtocol

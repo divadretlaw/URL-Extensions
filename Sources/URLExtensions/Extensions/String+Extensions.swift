@@ -9,6 +9,6 @@ import Foundation
 
 extension String {
     func removingCharacters(in set: CharacterSet) -> String {
-        self.components(separatedBy: set).joined()
+        components(separatedBy: set).joined()
     }
 }

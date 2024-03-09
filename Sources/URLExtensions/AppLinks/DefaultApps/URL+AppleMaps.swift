@@ -79,7 +79,7 @@ extension URL {
     /// Apple Maps URL Parameters
     ///
     /// See [Map Links](https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html) for more details.
-    public struct AppleMapsParameter: Equatable, Hashable, Codable {
+    public struct AppleMapsParameter: Equatable, Hashable, Codable, Sendable {
         /// The map type. If you don’t specify one of the documented values, the current map type is used.
         public var mapType: MapType?
         /// The query. This parameter is treated as if its value had been typed into the Maps search field by the user.
@@ -241,7 +241,7 @@ extension URL {
 
 extension URL.AppleMapsParameter {
     /// The map type used in Apple Maps
-    public enum MapType: String, Equatable, Hashable, Codable {
+    public enum MapType: String, Equatable, Hashable, Codable, Sendable {
         /// standard view
         case standard = "m"
         /// satellite view
@@ -253,7 +253,7 @@ extension URL.AppleMapsParameter {
     }
     
     /// The transport type used in Apple Maps
-    public enum TransportType: String, Equatable, Hashable, Codable {
+    public enum TransportType: String, Equatable, Hashable, Codable, Sendable {
         /// by car
         case car = "d"
         /// by foot
@@ -262,7 +262,7 @@ extension URL.AppleMapsParameter {
         case publicTransport = "r"
     }
     
-    public struct CoordinateSpan: Equatable, Hashable, Codable {
+    public struct CoordinateSpan: Equatable, Hashable, Codable, Sendable {
         public var latitudeDelta: Double
         public var longitudeDelta: Double
         
@@ -291,7 +291,7 @@ extension URL.AppleMapsParameter {
         }
     }
     
-    public struct Coordinate: Equatable, Hashable, Codable {
+    public struct Coordinate: Equatable, Hashable, Codable, Sendable {
         public var latitude: Double
         public var longitude: Double
         

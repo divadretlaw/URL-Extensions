@@ -16,8 +16,14 @@ final class URLQuerySingleValueDecodingContainer: SingleValueDecodingContainer {
     
     // MARK: - Errors
     
-    private func typeMismatchError<T>( type: T) -> DecodingError {
-        DecodingError.typeMismatch(T.self, DecodingError.Context(codingPath: self.decoder.codingPath, debugDescription: "Type of value was not expected."))
+    private func typeMismatchError<T>(type: T) -> DecodingError {
+        DecodingError.typeMismatch(
+            T.self,
+            DecodingError.Context(
+                codingPath: self.decoder.codingPath,
+                debugDescription: "Type of value was not expected."
+            )
+        )
     }
     
     // MARK: - SingleValueDecodingContainer

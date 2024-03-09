@@ -77,7 +77,7 @@ extension URL {
 // MARK: - Subtypes
 
 extension URL.Phone {
-    public enum Tab: Int, Codable {
+    public enum Tab: Int, Codable, Sendable {
         case call
         case favorites
         case recents

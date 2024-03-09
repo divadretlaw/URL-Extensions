@@ -48,7 +48,7 @@ extension URL {
     
     // MARK: Parameter
     
-    public struct SettingsParameter: Equatable, Hashable, Codable {
+    public struct SettingsParameter: Equatable, Hashable, Codable, Sendable {
         public var root: URL.Settings.Root?
         public var path: String?
         
@@ -83,7 +83,7 @@ extension URL {
 // MARK: - Subtypes
 
 extension URL.Settings {
-    public enum Root: String, Equatable, Hashable, Codable {
+    public enum Root: String, Equatable, Hashable, Codable, Sendable {
         case general = "General"
         
         case accessiblity = "ACCESSIBILITY"

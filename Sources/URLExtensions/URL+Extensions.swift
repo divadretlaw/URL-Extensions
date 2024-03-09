@@ -23,7 +23,7 @@ public extension URL {
     
     /// Initialize with string. Uses `NSDataDetector` to detect the first valid link within the text.
     ///
-    /// - Parameters
+    /// - Parameters:
     ///     - link: The link or text with a link to extract the URL from.
     ///     - scheme: The scheme to use, in case no scheme was extracted. Defaults to `https`.
     ///
@@ -55,7 +55,7 @@ public extension URL {
     
     /// Initialize with string. Uses `NSDataDetector` to detect the first valid link within the text.
     ///
-    /// - Parameters
+    /// - Parameters:
     ///     - link: The link or text with a link to extract the URL from.
     ///     - scheme: The scheme to use, in case no scheme was extracted. Defaults to `https`.
     ///     - encodingInvalidCharacters: True if `URL` should try to encode an invalid URL string, false otherwise.

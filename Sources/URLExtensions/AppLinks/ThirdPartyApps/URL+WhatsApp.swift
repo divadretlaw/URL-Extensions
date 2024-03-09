@@ -91,7 +91,7 @@ extension URL {
     
     // MARK: - Parameter
     
-    public struct WhatsAppParameter: Equatable, Hashable, Codable {
+    public struct WhatsAppParameter: Equatable, Hashable, Codable, Sendable {
         var text: String?
         
         public init(text: String? = nil) {

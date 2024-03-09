@@ -68,7 +68,7 @@ extension URL {
     /// App Store URL Parameters
     ///
     /// See [App Store Links](https://developer.apple.com/library/archive/qa/qa1629/_index.html) for more details.
-    public struct AppStoreParameter: Equatable, Hashable, Codable, CustomStringConvertible {
+    public struct AppStoreParameter: Equatable, Hashable, Codable, CustomStringConvertible, Sendable {
         /// The iTunes item identifier
         public var id: Int
         /// Optional country code

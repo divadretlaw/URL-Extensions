@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol AppLink {
+public protocol AppLink: Sendable {
     /// Initialize this app link from the given url
     ///
     /// - Parameter url: The url to parse
@@ -74,4 +74,3 @@ extension URL {
         return nil
     }
 }
-
