@@ -99,7 +99,7 @@ extension URL {
                 } catch {
                     return nil
                 }
-            } else if url.scheme(isAny: AppleMaps.schemes) {
+            } else if url.scheme(isAny: GoogleMaps.schemes) {
                 if let query = url.internalQuery() {
                     do {
                         self = try URLQueryDecoder().decode(GoogleMapsParameter.self, from: query)
