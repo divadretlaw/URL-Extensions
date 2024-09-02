@@ -1,8 +1,8 @@
 //
-//  URL+Notes.swift
+//  URL+Safari.swift
 //  URL+Extensions
 //
-//  Created by David Walter on 12.07.23.
+//  Created by David Walter on 31.08.24.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 extension URL {
     // MARK: - App
     
-    public struct Notes: Equatable, Hashable, Codable, AppLink {
+    public struct Safari: Equatable, Hashable, Codable, AppLink {
         public let url: URL
         
         public init?(url: URL) {
@@ -23,7 +23,7 @@ extension URL {
         public static var isDefaultApp: Bool { true }
         
         public static var schemes: [String] {
-            ["mobilenotes"]
+            ["x-safari-https"]
         }
     }
 }

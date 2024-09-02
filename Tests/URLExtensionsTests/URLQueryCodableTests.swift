@@ -21,8 +21,7 @@ final class URLQueryCodableTests: XCTestCase {
             var a: String
         }
         
-        let data = Test(value: Value(a: "Value"),
-                        date: .now)
+        let data = Test(value: Value(a: "Value"), date: Date())
         let encoder = URLQueryEncoder()
         encoder.nestedValueStrategy = .flatten
         let encoded: String = try encoder.encode(data)
@@ -33,7 +32,7 @@ final class URLQueryCodableTests: XCTestCase {
         struct Test: Codable, Equatable {
             var someBool: Bool = true
             var someString: String = "Test"
-            var someDate: Date = .now
+            var someDate: Date = Date()
             
             var someInt: Int = 1
             var someInt8: Int8 = -8

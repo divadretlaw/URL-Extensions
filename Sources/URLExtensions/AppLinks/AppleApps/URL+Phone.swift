@@ -9,15 +9,16 @@ import Foundation
 
 extension URL {
     public static func phone(number: String, prompt: Bool = false) -> URL {
-        let scheme = [
-            "tel",
-            prompt ? "prompt" : nil
-        ]
-            .compactMap { $0 }
-            .joined()
-        
+        if prompt {
+            URL.phone(tab: .callPrompt(number))
+        } else {
+            URL.phone(tab: .call(number))
+        }
+    }
+    
+    public static func phone(tab: Phone.Tab) -> URL {
         // swiftlint:disable:next force_unwrapping
-        return URL(string: "\(scheme):\(number.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? number)")!
+        return URL(string: "\(tab.scheme)")!
     }
 }
 
@@ -29,7 +30,6 @@ extension URL {
     /// See [Phone](https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/PhoneLinks/PhoneLinks.html)
     public struct Phone: Equatable, Hashable, Codable, AppLink {
         public let url: URL
-        public let number: String
         public let tab: Tab
         
         public init?(url: URL) {
@@ -37,7 +37,6 @@ extension URL {
             self.url = url
             
             guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return nil }
-            self.number = components.path
             
             switch components.scheme {
             case "mobilephone-favorites":
@@ -47,21 +46,30 @@ extension URL {
             case "vmshow":
                 self.tab = .voicemail
             default:
-                self.tab = .call
+                self.tab = .call(components.path)
             }
         }
         
         public init(number: String) {
             self.url = URL.phone(number: number)
-            self.number = number
-            self.tab = .call
+            self.tab = .call(number)
         }
         
         public init(tab: Tab) {
             // swiftlint:disable:next force_unwrapping
             self.url = URL(string: tab.scheme)!
-            self.number = ""
             self.tab = tab
+        }
+        
+        public var number: String {
+            switch tab {
+            case let .call(number):
+                number
+            case let .callPrompt(number):
+                number
+            default:
+                ""
+            }
         }
         
         // MARK: App Link
@@ -77,8 +85,10 @@ extension URL {
 // MARK: - Subtypes
 
 extension URL.Phone {
-    public enum Tab: Int, Codable, Sendable {
-        case call
+    public enum Tab: Hashable, Equatable, Codable, Sendable {
+        case call(String)
+        case callPrompt(String)
+        case sos
         case favorites
         case recents
         case voicemail
@@ -91,8 +101,12 @@ extension URL.Phone {
                 return "mobilephone-recents://"
             case .voicemail:
                 return "vmshow://"
-            default:
-                return "tel:"
+            case .sos:
+                return "telsos:"
+            case let .call(number):
+                return "tel:\(number.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? number)"
+            case let .callPrompt(number):
+                return "telprompt:\(number.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? number)"
             }
         }
     }

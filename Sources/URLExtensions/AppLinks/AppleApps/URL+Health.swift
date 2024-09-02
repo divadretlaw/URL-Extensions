@@ -8,7 +8,7 @@
 import Foundation
 
 extension URL {
-    public static func health(tab: Health.Tab?) -> URL {
+    public static func health(tab: Health.Tab? = nil) -> URL {
         // swiftlint:disable:next force_unwrapping
         return URL(string: "x-apple-health://\(tab?.rawValue ?? "")")!
     }

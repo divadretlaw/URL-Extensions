@@ -17,9 +17,11 @@ public final class URLQueryDecoder {
     public func decode<T>(_ type: T.Type, from string: String) throws -> T where T: Decodable {
         var components: [String: String] = [:]
         for component in string.split(separator: "&") {
-            let keyValue = component.split(separator: "=", maxSplits: 1).map { String($0) }
-            guard let key = keyValue[safe: 0] else { continue }
-            components[key] = keyValue[safe: 1]?.replacingOccurrences(of: "+", with: " ").removingPercentEncoding
+            let keyValue = component
+                .split(separator: "=", maxSplits: 1)
+                .map { String($0) }
+            guard let key = keyValue[safe: 0], let value = keyValue[safe: 1] else { continue }
+            components[key] = value.replacingOccurrences(of: "+", with: " ").removingPercentEncoding
         }
         return try T(from: _URLQueryDecoder(referencing: components))
     }

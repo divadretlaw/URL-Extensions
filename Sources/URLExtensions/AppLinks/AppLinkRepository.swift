@@ -67,7 +67,7 @@ public final class AppLinkRepository: @unchecked Sendable {
     }
     
     static func `default`() -> AppLinkRepository {
-        let defaultTypes: [AppLink.Type] = [
+        let appleTypes: [AppLink.Type] = [
             URL.AppleMaps.self,
             URL.AppStore.self,
             URL.Books.self,
@@ -75,27 +75,41 @@ public final class AppLinkRepository: @unchecked Sendable {
             URL.Calculator.self,
             URL.Calendar.self,
             URL.Camera.self,
+            URL.Clips.self,
             URL.Clock.self,
             URL.Contacts.self,
             URL.FaceTime.self,
             URL.Files.self,
             URL.Freeform.self,
             URL.Health.self,
+            URL.iTunes.self,
             URL.Mail.self,
+            URL.Music.self,
+            URL.MusicClassical.self,
+            URL.News.self,
             URL.Notes.self,
             URL.Phone.self,
             URL.Reminders.self,
+            URL.Safari.self,
             URL.Settings.self,
+            URL.Shortcuts.self,
             URL.SMS.self,
-            URL.Stocks.self
+            URL.Stocks.self,
+            URL.TestFlight.self,
+            URL.TV.self,
+            URL.Wallet.self
         ]
         
         let thirdPartyTypes: [AppLink.Type] = [
+            URL.DuckDuckGoPrivacyBrowser.self,
             URL.Firefox.self,
+            URL.GitHub.self,
+            URL.GoogleMaps.self,
             URL.WhatsApp.self,
+            URL.VLC.self,
             URL.YouTube.self
         ]
         
-        return AppLinkRepository(types: defaultTypes + thirdPartyTypes)
+        return AppLinkRepository(types: appleTypes + thirdPartyTypes)
     }
 }

@@ -23,7 +23,7 @@ extension URL {
         public static var isDefaultApp: Bool { true }
         
         public static var schemes: [String] {
-            ["contact", "people"]
+            ["contact", "people", "contacts"]
         }
     }
 }

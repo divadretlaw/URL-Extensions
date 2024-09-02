@@ -6,10 +6,25 @@
 //
 
 import Foundation
+import OSLog
 
 extension URL {
-    public static func settings(root: URL.Settings.Root? = nil, path: String? = nil) -> URL {
-        fatalError("Not implemented")
+    public static func settings(root: Settings.Root? = nil, path: String? = nil) -> URL {
+        // swiftlint:disable:next force_unwrapping
+        var components = URLComponents(string: "app-prefs://")!
+        let parameters = SettingsParameter(root: root, path: path)
+        
+        do {
+            components.queryItems = try URLQueryEncoder().encode(parameters)
+        } catch {
+            Logger.url.error("\(error.localizedDescription). This is a bug! Please file a report.")
+        }
+        
+        guard let url = components.url else {
+            fatalError("Unable to create valid URL. This is a bug! Please file a report.")
+        }
+        
+        return url
     }
 }
 
@@ -88,7 +103,7 @@ extension URL.Settings {
         
         case accessiblity = "ACCESSIBILITY"
         case airPlaneMode = "AIRPLANE_MODE"
-        case appleId = "APPLE_ACCOUNT"
+        case appleAccount = "APPLE_ACCOUNT"
         case appStore = "STORE"
         case battery = "BATTERY_USAGE"
         case bluetooth = "Bluetooth"
@@ -99,8 +114,11 @@ extension URL.Settings {
         case cellular = "MOBILE_DATA_SETTINGS_ID"
         case compass = "COMPASS"
         case contacts = "CONTACTS"
+        case controlCenter = "ControlCenter"
         case display = "DISPLAY"
         case dns = "VPN/DNS"
+        case doNotDisturb = "DO_NOT_DISTURB"
+        case emergency = "EMERGENCY_SOS"
         case faceTime = "FACETIME"
         case health = "HEALTH"
         case iCloud = "CASTLE"
@@ -114,6 +132,7 @@ extension URL.Settings {
         case notifications = "NOTIFICATIONS_ID"
         case passcode = "PASSCODE"
         case passwords = "PASSWORDS"
+        case pencil = "Pencil"
         case personalHotspot = "INTERNET_TETHERING"
         case phone = "Phone"
         case photos = "Photos"
@@ -128,5 +147,7 @@ extension URL.Settings {
         case wallet = "PASSBOOK"
         case wallpaper = "Wallpaper"
         case wifi = "WIFI"
+        
+        public static let appleId = Root.appleAccount
     }
 }
