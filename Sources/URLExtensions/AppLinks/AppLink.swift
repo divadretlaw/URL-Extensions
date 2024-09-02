@@ -1,5 +1,5 @@
 //
-//  URL+AppLink.swift
+//  AppLink.swift
 //  URL+Extensions
 //
 //  Created by David Walter on 09.07.23.

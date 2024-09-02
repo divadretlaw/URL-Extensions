@@ -8,7 +8,7 @@
 import Foundation
 
 extension URL {
-    public static func youtTube(videoIdentifier: String, preferUniversalLink: Bool = false) -> URL {
+    public static func youTube(videoIdentifier: String, preferUniversalLink: Bool = false) -> URL {
         if preferUniversalLink {
             // swiftlint:disable:next force_unwrapping
             var components = URLComponents(string: "https://youtube.com/watch")!
@@ -70,7 +70,7 @@ extension URL {
         }
         
         public init(videoIdentifier: String) {
-            self.url = URL.youtTube(videoIdentifier: videoIdentifier)
+            self.url = URL.youTube(videoIdentifier: videoIdentifier)
             self.videoIdentifier = videoIdentifier
         }
         

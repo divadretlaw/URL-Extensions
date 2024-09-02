@@ -325,7 +325,7 @@ extension URL.AppleMapsParameter {
 
 private extension Double {
     init?(_ string: String.SubSequence?) {
-        guard let string = string else { return nil }
+        guard let string else { return nil }
         guard let value = Double(string) else { return nil }
         self = value
     }
