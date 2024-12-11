@@ -279,7 +279,13 @@ extension URL.AppleMapsParameter {
             let string = try container.decode(String.self)
             let components = string.split(separator: ",")
             guard let latitudeDelta = Double(components[safe: 0]), let longitudeDelta = Double(components[safe: 1]) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Data must a comma-separated pair of floating point values that represent latitude and longitude (in that order).", underlyingError: nil))
+                throw DecodingError.dataCorrupted(
+                    DecodingError.Context(
+                        codingPath: decoder.codingPath,
+                        debugDescription: "Data must a comma-separated pair of floating point values that represent latitude and longitude (in that order).",
+                        underlyingError: nil
+                    )
+                )
             }
             self.latitudeDelta = latitudeDelta
             self.longitudeDelta = longitudeDelta
@@ -308,7 +314,13 @@ extension URL.AppleMapsParameter {
             let string = try container.decode(String.self)
             let components = string.split(separator: ",")
             guard let latitude = Double(components[safe: 0]), let longitude = Double(components[safe: 1]) else {
-                throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Data must a comma-separated pair of floating point values that represent latitude and longitude (in that order).", underlyingError: nil))
+                throw DecodingError.dataCorrupted(
+                    DecodingError.Context(
+                        codingPath: decoder.codingPath,
+                        debugDescription: "Data must a comma-separated pair of floating point values that represent latitude and longitude (in that order).",
+                        underlyingError: nil
+                    )
+                )
             }
             self.latitude = latitude
             self.longitude = longitude

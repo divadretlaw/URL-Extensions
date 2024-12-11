@@ -89,6 +89,7 @@ public final class AppLinkRepository: @unchecked Sendable {
             URL.News.self,
             URL.Notes.self,
             URL.Phone.self,
+            URL.Photos.self,
             URL.Reminders.self,
             URL.Safari.self,
             URL.Settings.self,
@@ -105,8 +106,8 @@ public final class AppLinkRepository: @unchecked Sendable {
             URL.Firefox.self,
             URL.GitHub.self,
             URL.GoogleMaps.self,
-            URL.WhatsApp.self,
             URL.VLC.self,
+            URL.WhatsApp.self,
             URL.YouTube.self
         ]
         

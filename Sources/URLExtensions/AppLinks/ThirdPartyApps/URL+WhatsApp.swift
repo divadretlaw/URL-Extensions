@@ -14,10 +14,10 @@ extension URL {
         
         if preferUniversalLink {
             // swiftlint:disable:next force_unwrapping
-            components = URLComponents(string: "https://wa.me/\(number?.whatsApped() ?? "")")!
+            components = URLComponents(string: "https://wa.me/\(number.whatsApped())")!
         } else {
             // swiftlint:disable:next force_unwrapping
-            components = URLComponents(string: "whatsapp://\(number?.whatsApped() ?? "")")!
+            components = URLComponents(string: "whatsapp://\(number.whatsApped())")!
         }
         
         if let parameters = parameters {
@@ -115,6 +115,13 @@ extension URL {
             
             try container.encodeIfPresent(self.text, forKey: .text)
         }
+    }
+}
+
+private extension String? {
+    func whatsApped() -> String {
+        guard let self else { return "" }
+        return self.whatsApped()
     }
 }
 

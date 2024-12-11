@@ -9,8 +9,11 @@ import Foundation
 
 extension URL {
     public static func health(tab: Health.Tab? = nil) -> URL {
+        let string = ["x-apple-health://", tab?.rawValue]
+            .compactMap { $0 }
+            .joined()
         // swiftlint:disable:next force_unwrapping
-        return URL(string: "x-apple-health://\(tab?.rawValue ?? "")")!
+        return URL(string: string)!
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  URL+AppleNews.swift
+//  URL+News.swift
 //  URL+Extensions
 //
 //  Created by David Walter on 01.09.24.

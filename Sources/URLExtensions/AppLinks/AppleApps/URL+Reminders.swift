@@ -9,8 +9,11 @@ import Foundation
 
 extension URL {
     public static func reminder(id: String? = nil) -> URL {
+        let string = ["x-apple-reminder://", id]
+            .compactMap { $0 }
+            .joined()
         // swiftlint:disable:next force_unwrapping
-        URL(string: "x-apple-reminder://\(id ?? "")")!
+        return URL(string: string)!
     }
 }
 
