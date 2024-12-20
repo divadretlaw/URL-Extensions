@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 
 extension Logger {
-    #if swift(>=5.10) && swift(<6.0)
+    #if swift(>=5.10) && compiler(<6.0)
     nonisolated(unsafe) static let url = Logger(subsystem: "at.davidwalter.extensions.url", category: "URL")
     #else
     static let url = Logger(subsystem: "at.davidwalter.extensions.url", category: "URL")
