@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension URL {
+extension URL.ThirdParty {
     public static func youTube(videoIdentifier: String, preferUniversalLink: Bool = false) -> URL {
         if preferUniversalLink {
             // swiftlint:disable:next force_unwrapping
@@ -24,9 +24,7 @@ extension URL {
             return URL(string: "youtube://\(videoIdentifier.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? videoIdentifier)")!
         }
     }
-}
-
-extension URL {
+    
     // MARK: - App
     
     /// YouTube URL
@@ -70,7 +68,7 @@ extension URL {
         }
         
         public init(videoIdentifier: String) {
-            self.url = URL.youTube(videoIdentifier: videoIdentifier)
+            self.url = URL.ThirdParty.youTube(videoIdentifier: videoIdentifier)
             self.videoIdentifier = videoIdentifier
         }
         

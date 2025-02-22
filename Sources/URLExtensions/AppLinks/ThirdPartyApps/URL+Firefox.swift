@@ -7,7 +7,15 @@
 
 import Foundation
 
-extension URL {
+extension URL.ThirdParty {
+    /// Creates a Firefox URL instance from the provided data.
+    ///
+    /// - Parameter url: The url to open
+    public static func firefox(url: URL) -> URL {
+        // swiftlint:disable:next force_unwrapping
+        return URL(string: "firefox://open-url?url=\(url.string(omitScheme: true, addingPercentEncoding: .urlQueryAllowed))")!
+    }
+    
     // MARK: - App
     
     public struct Firefox: Equatable, Hashable, Codable, AppLink {

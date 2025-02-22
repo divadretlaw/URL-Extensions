@@ -10,6 +10,9 @@ import Foundation
 // MARK: - Public
 
 public extension URL {
+    enum ThirdParty {
+    }
+    
     /// Checks if the URL can be opened with Safari
     var supportsSafari: Bool {
         guard let scheme = scheme?.lowercased() else { return false }
@@ -127,5 +130,25 @@ extension URL {
         } else {
             return query
         }
+    }
+    
+    internal func internalPath() -> String? {
+        if #available(macOS 13, iOS 16, watchOS 9, tvOS 16, visionOS 1, *) {
+            return path(percentEncoded: false)
+        } else {
+            return path
+        }
+    }
+    
+    internal func string(omitScheme: Bool = true, addingPercentEncoding withAllowedCharacters: CharacterSet) -> String {
+        guard var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
+            return absoluteString.addingPercentEncoding(withAllowedCharacters: withAllowedCharacters) ?? absoluteString
+        }
+        
+        if omitScheme {
+            urlComponents.scheme = nil
+        }
+        let value = urlComponents.string ?? absoluteString
+        return value.addingPercentEncoding(withAllowedCharacters: withAllowedCharacters) ?? value
     }
 }

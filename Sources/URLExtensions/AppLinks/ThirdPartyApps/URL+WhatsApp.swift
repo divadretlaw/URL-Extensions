@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-extension URL {
+extension URL.ThirdParty {
     public static func whatsApp(number: String? = nil, parameters: WhatsAppParameter? = nil, preferUniversalLink: Bool = false) -> URL {
         var components: URLComponents
         
@@ -34,9 +34,7 @@ extension URL {
         
         return url
     }
-}
-
-extension URL {
+    
     // MARK: - App
     
     /// WhatsApp URL
@@ -71,7 +69,7 @@ extension URL {
         }
         
         public init(number: String? = nil, parameters: WhatsAppParameter? = nil) {
-            self.url = URL.whatsApp(number: number, parameters: parameters)
+            self.url = URL.ThirdParty.whatsApp(number: number, parameters: parameters)
             self.number = number
             self.parameters = parameters ?? .init()
         }

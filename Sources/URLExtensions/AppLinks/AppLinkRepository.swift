@@ -102,13 +102,13 @@ public final class AppLinkRepository: @unchecked Sendable {
         ]
         
         let thirdPartyTypes: [AppLink.Type] = [
-            URL.DuckDuckGoPrivacyBrowser.self,
-            URL.Firefox.self,
-            URL.GitHub.self,
-            URL.GoogleMaps.self,
-            URL.VLC.self,
-            URL.WhatsApp.self,
-            URL.YouTube.self
+            URL.ThirdParty.DuckDuckGoPrivacyBrowser.self,
+            URL.ThirdParty.Firefox.self,
+            URL.ThirdParty.GitHub.self,
+            URL.ThirdParty.GoogleMaps.self,
+            URL.ThirdParty.VLC.self,
+            URL.ThirdParty.WhatsApp.self,
+            URL.ThirdParty.YouTube.self
         ]
         
         return AppLinkRepository(types: appleTypes + thirdPartyTypes)

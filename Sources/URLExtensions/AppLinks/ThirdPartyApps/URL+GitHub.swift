@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension URL {
+extension URL.ThirdParty {
     // MARK: - App
     
     public struct GitHub: Equatable, Hashable, Codable, AppLink {

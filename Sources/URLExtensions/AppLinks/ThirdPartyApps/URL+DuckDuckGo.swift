@@ -7,7 +7,15 @@
 
 import Foundation
 
-extension URL {
+extension URL.ThirdParty {
+    /// Creates a DuckDuckGo URL instance from the provided data.
+    ///
+    /// - Parameter url: The url to open
+    public static func duckDuckGo(url: URL) -> URL {
+        // swiftlint:disable:next force_unwrapping
+        return URL(string: "ddgQuickLink://\(url.string(omitScheme: true, addingPercentEncoding: .urlPathAllowed))")!
+    }
+    
     // MARK: - App
     
     public struct DuckDuckGoPrivacyBrowser: Equatable, Hashable, Codable, AppLink {

@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-extension URL {
+extension URL.ThirdParty {
     /// Creates a Google Maps URL instance from the provided data.
     ///
     /// - Parameters:
@@ -37,10 +37,7 @@ extension URL {
         
         return url
     }
-}
-
-
-extension URL {
+    
     // MARK: - App
     
     public struct GoogleMaps: Equatable, Hashable, Codable, AppLink {
@@ -54,7 +51,7 @@ extension URL {
         }
         
         public init(parameters: GoogleMapsParameter) {
-            self.url = URL.googleMaps(parameters: parameters)
+            self.url = URL.ThirdParty.googleMaps(parameters: parameters)
             self.parameters = parameters
         }
         
@@ -181,7 +178,7 @@ extension URL {
     }
 }
 
-extension URL.GoogleMapsParameter {
+extension URL.ThirdParty.GoogleMapsParameter {
     public enum MapMode: String, Equatable, Hashable, Codable, Sendable {
         /// standard view
         case standard = "standard"
