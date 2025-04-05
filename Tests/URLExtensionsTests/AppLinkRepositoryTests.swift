@@ -1,36 +1,37 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class AppLinkRepositoryTests: XCTestCase {
-    func testInit() throws {
+struct AppLinkRepositoryTests {
+    @Test func `init`() throws {
         let repository = AppLinkRepository()
-        XCTAssertTrue(repository.types.isEmpty)
+        #expect(repository.types.isEmpty == true)
     }
     
-    func testRegister() throws {
+    @Test func tregister() throws {
         let repository = AppLinkRepository()
         repository.register(type: URL.AppStore.self)
-        XCTAssertFalse(repository.types.isEmpty)
+        #expect(repository.types.isEmpty == false)
     }
     
-    func testUnregister() throws {
+    @Test func unregister() throws {
         let repository = AppLinkRepository()
         repository.restoreDefaults()
-        XCTAssertFalse(repository.types.isEmpty)
+        #expect(repository.types.isEmpty == false)
         repository.unregisterAll()
-        XCTAssertTrue(repository.types.isEmpty)
+        #expect(repository.types.isEmpty == true)
     }
     
-    func testURLWithAppNotRegistered() throws {
-        let url = try XCTUnwrap(URL(string: "https://apps.apple.com/us/app/apple-store/id375380948?mt=8"))
+    @Test func urlWithAppNotRegistered() throws {
+        let url = try #require(URL(string: "https://apps.apple.com/us/app/apple-store/id375380948?mt=8"))
         let repository = AppLinkRepository()
-        XCTAssertNil(url.app(from: repository))
+        #expect(url.app(from: repository) == nil)
     }
     
-    func testURLWithAppRegistered() throws {
-        let url = try XCTUnwrap(URL(string: "https://apps.apple.com/us/app/apple-store/id375380948?mt=8"))
+    @Test func urlWithAppRegistered() throws {
+        let url = try #require(URL(string: "https://apps.apple.com/us/app/apple-store/id375380948?mt=8"))
         let repository = AppLinkRepository()
         repository.register(type: URL.AppStore.self)
-        XCTAssertNotNil(url.app(from: repository))
+        #expect(url.app(from: repository) != nil)
     }
 }

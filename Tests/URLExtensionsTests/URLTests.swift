@@ -1,62 +1,41 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class URLTests: XCTestCase {
-    func testUrlAppPerformanceHttps() throws {
-        let testData = (0..<10_000).map { _ in URL(string: "https://www.\(UUID().uuidString).com")! }
-        
-        measure {
-            for url in testData {
-                let app = url.app()
-                XCTAssertNil(app)
-            }
-        }
+struct URLTests {
+    @Test func noSchemeUrl() throws {
+        let url = try #require(URL(link: "apple.com"))
+
+        #expect(url.supportsSafari == true)
     }
     
-    func testUrlAppPerformanceCustom() throws {
-        let testData = (0..<100_00).map { _ in URL(string: "custom-app-scheme://www.\(UUID().uuidString).com")! }
-        
-        measure {
-            for url in testData {
-                let app = url.app()
-                XCTAssertNil(app)
-            }
-        }
+    @Test func httpUrl() throws {
+        let url = try #require(URL(string: "http://captive.apple.com"))
+
+        #expect(url.supportsSafari == true)
     }
     
-    func testNoSchemeUrl() throws {
-        let url = try XCTUnwrap(URL(link: "apple.com"))
-        
-        XCTAssertTrue(url.supportsSafari)
+    @Test func httpsUrl() throws {
+        let url = try #require(URL(string: "https://www.apple.com"))
+
+        #expect(url.supportsSafari == true)
     }
     
-    func testHttpUrl() throws {
-        let url = try XCTUnwrap(URL(string: "http://captive.apple.com"))
-        
-        XCTAssertTrue(url.supportsSafari)
+    @Test func ftpUrl() throws {
+        let url = try #require(URL(string: "ftp://localhost"))
+
+        #expect(url.supportsSafari == false)
     }
     
-    func testHttpsUrl() throws {
-        let url = try XCTUnwrap(URL(string: "https://www.apple.com"))
-        
-        XCTAssertTrue(url.supportsSafari)
+    @Test func validAppleMapsUrl() throws {
+        let url = try #require(URL(string: "https://maps.apple.com/?address=Cupertino"))
+
+        #expect(url.supportsSafari == false)
     }
     
-    func testFtpUrl() throws {
-        let url = try XCTUnwrap(URL(string: "ftp://localhost"))
-        
-        XCTAssertFalse(url.supportsSafari)
-    }
-    
-    func testValidAppleMapsUrl() throws {
-        let url = try XCTUnwrap(URL(string: "https://maps.apple.com/?address=Cupertino"))
-        
-        XCTAssertFalse(url.supportsSafari)
-    }
-    
-    func testAppleMapsWebsiteUrl() throws {
-        let url = try XCTUnwrap(URL(string: "https://maps.apple.com/"))
-        
-        XCTAssertTrue(url.supportsSafari)
+    @Test  func appleMapsWebsiteUrl() throws {
+        let url = try #require(URL(string: "https://maps.apple.com/"))
+
+        #expect(url.supportsSafari == true)
     }
 }

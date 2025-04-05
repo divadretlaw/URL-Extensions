@@ -1,17 +1,18 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class URLQueryCodableTests: XCTestCase {
-    func testEncodable() throws {
+struct URLQueryCodableTests {
+    @Test func encodable() throws {
         let data = URL.AppleMapsParameter(mapType: .satellite, address: "Cupertino, California")
         let encoded: [URLQueryItem] = try URLQueryEncoder().encode(data)
         
         guard var components = URLComponents(string: "https://maps.apple.com") else { return }
         components.queryItems = encoded
-        XCTAssertNotNil(components.url)
+        #expect(components.url != nil)
     }
-    
-    func testOtherEncodable() throws {
+
+    @Test func otherEncodable() throws {
         struct Test: Codable {
             var value: Value
             var date: Date
@@ -27,8 +28,8 @@ final class URLQueryCodableTests: XCTestCase {
         let encoded: String = try encoder.encode(data)
         print(encoded)
     }
-    
-    func testAllTypesCodable() throws {
+
+    @Test func allTypesCodable() throws {
         struct Test: Codable, Equatable {
             var someBool: Bool = true
             var someString: String = "Test"
@@ -59,26 +60,26 @@ final class URLQueryCodableTests: XCTestCase {
         
         let decoder = URLQueryDecoder()
         let decoded = try decoder.decode(Test.self, from: encoded)
-        XCTAssertEqual(data, decoded)
+        #expect(data == decoded)
     }
-    
-    func testDecodable() throws {
-        let url = try XCTUnwrap(URL(string: "https://maps.apple.com/?address=Cupertino&t=k&asdf=jklo"))
-        
+
+    @Test func decodable() throws {
+        let url = try #require(URL(string: "https://maps.apple.com/?address=Cupertino&t=k&asdf=jklo"))
+
         guard let query = url.query else {
-            XCTFail("Invalid query in URL.")
+            Issue.record("Invalid query in URL.")
             return
         }
         
         let decoded = try URLQueryDecoder().decode(URL.AppleMapsParameter.self, from: Data(query.utf8))
-        XCTAssertEqual(decoded.mapType, .satellite)
-        XCTAssertEqual(decoded.address, "Cupertino")
+        #expect(decoded.mapType == .satellite)
+        #expect(decoded.address == "Cupertino")
     }
-    
-    func testEncodeDecode() throws {
+
+    @Test func encodeDecode() throws {
         let data = URL.AppleMapsParameter(mapType: .satellite, address: "Cupertino, California")
         let encoded: String = try URLQueryEncoder().encode(data)
         let decoded = try URLQueryDecoder().decode(URL.AppleMapsParameter.self, from: encoded)
-        XCTAssertEqual(data, decoded)
+        #expect(data == decoded)
     }
 }

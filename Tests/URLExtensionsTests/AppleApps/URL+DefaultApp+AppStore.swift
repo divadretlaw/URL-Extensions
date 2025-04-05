@@ -1,49 +1,50 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class URL_DefaultApp_AppStore: XCTestCase {
-    func testInitDefault() throws {
+struct URL_DefaultApp_AppStore {
+    @Test func initDefault() throws {
         let parameters = URL.AppStoreParameter(id: 375380948)
         let url = URL.appStore(parameters: parameters)
         
-        XCTAssertEqual(url.scheme, "itms-apps")
-        XCTAssertEqual(url.absoluteString, "itms-apps://apps.apple.com/app/id375380948")
+        #expect(url.scheme == "itms-apps")
+        #expect(url.absoluteString == "itms-apps://apps.apple.com/app/id375380948")
     }
     
-    func testInit() throws {
+    @Test func `init`() throws {
         let parameters = URL.AppStoreParameter(id: 375380948)
         let url = URL.appStore(parameters: parameters, preferUniversalLink: true)
         
-        XCTAssertEqual(url.scheme, "https")
-        XCTAssertEqual(url.absoluteString, "https://apps.apple.com/app/id375380948")
+        #expect(url.scheme == "https")
+        #expect(url.absoluteString == "https://apps.apple.com/app/id375380948")
     }
     
-    func testInitCountryCode() throws {
+    @Test func initCountryCode() throws {
         let parameters = URL.AppStoreParameter(id: 375380948, countryCode: "at")
         let url = URL.appStore(parameters: parameters, preferUniversalLink: true)
         
-        XCTAssertEqual(url.scheme, "https")
-        XCTAssertEqual(url.absoluteString, "https://apps.apple.com/at/app/id375380948")
+        #expect(url.scheme == "https")
+        #expect(url.absoluteString == "https://apps.apple.com/at/app/id375380948")
     }
     
-    func testiTunes() throws {
-        let url = try XCTUnwrap(URL(string: "https://itunes.apple.com/us/app/apple-store/id375380948?mt=8"))
-        let app = try XCTUnwrap(url.app() as? URL.AppStore)
-        
-        XCTAssertEqual(app.parameters.id, 375380948)
+    @Test func iTunes() throws {
+        let url = try #require(URL(string: "https://itunes.apple.com/us/app/apple-store/id375380948?mt=8"))
+        let app = try #require(url.app() as? URL.AppStore)
+
+        #expect(app.parameters.id == 375380948)
     }
     
-    func testApps() throws {
-        let url = try XCTUnwrap(URL(string: "https://apps.apple.com/us/app/apple-store/id375380948?mt=8"))
-        let app = try XCTUnwrap(url.app() as? URL.AppStore)
-        
-        XCTAssertEqual(app.parameters.id, 375380948)
+    @Test func apps() throws {
+        let url = try #require(URL(string: "https://apps.apple.com/us/app/apple-store/id375380948?mt=8"))
+        let app = try #require(url.app() as? URL.AppStore)
+
+        #expect(app.parameters.id == 375380948)
     }
     
-    func testWithoutRegion() throws {
-        let url = try XCTUnwrap(URL(string: "https://itunes.apple.com/app/apple-store/id375380948?mt=8"))
-        let app = try XCTUnwrap(url.app() as? URL.AppStore)
+    @Test func withoutRegion() throws {
+        let url = try #require(URL(string: "https://itunes.apple.com/app/apple-store/id375380948?mt=8"))
+        let app = try #require(url.app() as? URL.AppStore)
         
-        XCTAssertEqual(app.parameters.id, 375380948)
+        #expect(app.parameters.id == 375380948)
     }
 }

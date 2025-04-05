@@ -1,25 +1,26 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class URL_DefaultApp_FaceTime: XCTestCase {
-    func testInit() throws {
+struct URL_DefaultApp_FaceTime {
+    @Test func `init`() throws {
         let url = URL.faceTime(user: "1-408-555-5555")
         
-        XCTAssertEqual(url.scheme, "facetime")
-        XCTAssertEqual(url.absoluteString, "facetime://1-408-555-5555")
+        #expect(url.scheme == "facetime")
+        #expect(url.absoluteString == "facetime://1-408-555-5555")
     }
     
-    func testInitAudio() throws {
+    @Test func initAudio() throws {
         let url = URL.faceTime(user: "1-408-555-5555", audio: true)
         
-        XCTAssertEqual(url.scheme, "facetime-audio")
-        XCTAssertEqual(url.absoluteString, "facetime-audio://1-408-555-5555")
+        #expect(url.scheme == "facetime-audio")
+        #expect(url.absoluteString == "facetime-audio://1-408-555-5555")
     }
     
-    func testURL() throws {
-        let url = try XCTUnwrap(URL(string: "facetime:1-408-555-5555"))
-        let app = try XCTUnwrap(url.app() as? URL.FaceTime)
+    @Test func url() throws {
+        let url = try #require(URL(string: "facetime:1-408-555-5555"))
+        let app = try #require(url.app() as? URL.FaceTime)
         
-        XCTAssertEqual(app.user, "1-408-555-5555")
+        #expect(app.user == "1-408-555-5555")
     }
 }

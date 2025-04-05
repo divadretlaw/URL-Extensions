@@ -1,12 +1,13 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class URL_DefaultApp_Settings: XCTestCase {
-    func testInit() throws {
-        let url = try XCTUnwrap(URL(string: "app-prefs:root=General&path=About"))
-        let app = try XCTUnwrap(url.app() as? URL.Settings)
+struct URL_DefaultApp_Settings {
+    @Test func `init`() throws {
+        let url = try #require(URL(string: "app-prefs:root=General&path=About"))
+        let app = try #require(url.app() as? URL.Settings)
         
-        XCTAssertEqual(app.parameter.root, .general)
-        XCTAssertEqual(app.parameter.path, "About")
+        #expect(app.parameter.root == .general)
+        #expect(app.parameter.path == "About")
     }
 }

@@ -1,64 +1,65 @@
-import XCTest
+import Foundation
+import Testing
 @testable import URLExtensions
 
-final class URL_DefaultApp_Other: XCTestCase {
-    func testBooks() throws {
-        let url = try XCTUnwrap(URL(string: "ibooks://"))
-        
-        XCTAssertIsType(url.app(), URL.Books.self)
+struct URL_DefaultApp_Other {
+    @Test func books() throws {
+        let url = try #require(URL(string: "ibooks://"))
+
+        #expect(url.app() is URL.Books)
     }
     
-    func testCalendar() throws {
-        let url = try XCTUnwrap(URL(string: "calshow://"))
-        
-        XCTAssertIsType(url.app(), URL.Calendar.self)
+    @Test func calendar() throws {
+        let url = try #require(URL(string: "calshow://"))
+
+        #expect(url.app() is URL.Calendar)
     }
     
-    func testCalculator() throws {
-        let url = try XCTUnwrap(URL(string: "calc://"))
-        
-        XCTAssertIsType(url.app(), URL.Calculator.self)
+    @Test func calculator() throws {
+        let url = try #require(URL(string: "calc://"))
+
+        #expect(url.app() is URL.Calculator)
     }
     
-    func testCamera() throws {
-        let url = try XCTUnwrap(URL(string: "camera://"))
-        
-        XCTAssertIsType(url.app(), URL.Camera.self)
+    @Test func camera() throws {
+        let url = try #require(URL(string: "camera://"))
+
+        #expect(url.app() is URL.Camera)
     }
     
-    func testContacts() throws {
-        let url = try XCTUnwrap(URL(string: "contact://"))
-        
-        XCTAssertIsType(url.app(), URL.Contacts.self)
+    @Test func contacts() throws {
+        let url = try #require(URL(string: "contact://"))
+
+        #expect(url.app() is URL.Contacts)
     }
     
-    func testFiles() throws {
-        let url = try XCTUnwrap(URL(string: "shareddocuments://"))
-        
-        XCTAssertIsType(url.app(), URL.Files.self)
+    @Test func files() throws {
+        let url = try #require(URL(string: "shareddocuments://"))
+
+        #expect(url.app() is URL.Files)
     }
     
-    func testFreeform() throws {
-        let url = try XCTUnwrap(URL(string: "freeform://"))
-        
-        XCTAssertIsType(url.app(), URL.Freeform.self)
+    @Test func freeform() throws {
+        let url = try #require(URL(string: "freeform://"))
+
+        #expect(url.app() is URL.Freeform)
     }
     
-    func testNotes() throws {
-        let url = try XCTUnwrap(URL(string: "mobilenotes://"))
-        
-        XCTAssertIsType(url.app(), URL.Notes.self)
+    @Test func nNotes() throws {
+        let url = try #require(URL(string: "mobilenotes://"))
+
+        #expect(url.app() is URL.Notes)
     }
     
-    func testReminders() throws {
-        let url = try XCTUnwrap(URL(string: "x-apple-reminder://"))
-        
-        XCTAssertIsType(url.app(), URL.Reminders.self)
+    @Test func reminders() throws {
+        let url = try #require(URL(string: "x-apple-reminder://"))
+
+        #expect(url.app() is URL.Reminders)
     }
     
-    func testStocks() throws {
-        let url = try XCTUnwrap(URL(string: "stocks://"))
+    @Test func stocks() throws {
+        let url = try #require(URL(string: "stocks://"))
         
-        XCTAssertIsType(url.app(), URL.Stocks.self)
+        #expect(url.app() is URL.Stocks)
     }
 }
