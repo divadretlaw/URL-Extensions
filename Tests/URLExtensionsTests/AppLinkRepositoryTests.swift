@@ -8,7 +8,7 @@ struct AppLinkRepositoryTests {
         #expect(repository.types.isEmpty == true)
     }
     
-    @Test func tregister() throws {
+    @Test func register() throws {
         let repository = AppLinkRepository()
         repository.register(type: URL.AppStore.self)
         #expect(repository.types.isEmpty == false)
